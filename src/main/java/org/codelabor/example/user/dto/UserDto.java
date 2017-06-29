@@ -4,6 +4,13 @@ import java.io.Serializable;
 
 public class UserDto implements Serializable {
 
+	public UserDto(String username, String firstName, String lastName) {
+		super();
+		this.username = username;
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
+
 	/**
 	 * 
 	 */
@@ -12,24 +19,31 @@ public class UserDto implements Serializable {
 	private String firstName;
 	private String lastName;
 	private String username;
+
 	public String getFirstName() {
 		return firstName;
 	}
+
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
+
 	public String getLastName() {
 		return lastName;
 	}
+
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+
 	public String getUsername() {
 		return username;
 	}
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -39,6 +53,7 @@ public class UserDto implements Serializable {
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -74,6 +89,7 @@ public class UserDto implements Serializable {
 		}
 		return true;
 	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();

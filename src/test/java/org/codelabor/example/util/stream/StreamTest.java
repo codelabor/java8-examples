@@ -49,6 +49,8 @@ public class StreamTest {
 		userDtoList.stream().forEach(userDto -> logger.info("username: {}", userDto.getUsername()));
 		userDtoList.stream().map(userDto -> userDto.getUsername())
 				.forEach(username -> logger.info("username: {}", username));
+		userDtoList.stream().map(userDto -> userDto.getUsername())
+		.forEach(System.out::println);
 	}
 
 }
