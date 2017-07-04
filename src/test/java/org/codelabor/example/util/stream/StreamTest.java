@@ -16,23 +16,44 @@ public class StreamTest {
 	private Logger logger = LoggerFactory.getLogger(StreamTest.class);
 
 	private Integer[] intArray = { 1, 2, 3, 4, 5 };
-	private List<UserDto> userDtoList = new ArrayList<UserDto>();
+
+	private List<String> userGroup1 = new ArrayList<String>();
+	private List<String> userGroup2 = new ArrayList<String>();
+	
+	private List<UserDto> userDtoList1 = new ArrayList<UserDto>();
+	private List<UserDto> userDtoList2 = new ArrayList<UserDto>();
 
 	@Before
 	public void setUp() {
-		userDtoList.add(new UserDto("user1", "firstName1", "lastName1"));
-		userDtoList.add(new UserDto("user2", "firstName2", "lastName2"));
-		userDtoList.add(new UserDto("user3", "firstName3", "lastName3"));
-		userDtoList.add(new UserDto("user4", "firstName4", "lastName4"));
-		userDtoList.add(new UserDto("user5", "firstName5", "lastName5"));
+		userGroup1.add("user1");
+		userGroup1.add("user2");
+		userGroup1.add("user3");
+		userGroup1.add("user4");
+		userGroup1.add("user5");
+		
+		userGroup2.add("user1");
+		userGroup2.add("user2");
+		userGroup2.add("user3");
+		userGroup2.add("user6");
+		userGroup2.add("user7");
+		
+		userDtoList1.add(new UserDto("user1", "firstName1", "lastName1"));
+		userDtoList1.add(new UserDto("user2", "firstName2", "lastName2"));
+		userDtoList1.add(new UserDto("user3", "firstName3", "lastName3"));
+		userDtoList1.add(new UserDto("user4", "firstName4", "lastName4"));
+		userDtoList1.add(new UserDto("user5", "firstName5", "lastName5"));
+		
+		userDtoList2.add(new UserDto("user1", "firstName1", "lastName1"));
+		userDtoList2.add(new UserDto("user2", "firstName2", "lastName2"));
+		userDtoList2.add(new UserDto("user3", "firstName3", "lastName3"));
+		userDtoList2.add(new UserDto("user6", "firstName6", "lastName6"));
+		userDtoList2.add(new UserDto("user7", "firstName7", "lastName7"));
 	}
 
 	@Test
 	public void testAsList() {
-
 		List<Integer> intList1 = Arrays.asList(intArray);
 		logger.info("intList1: {}", intList1);
-
 	}
 
 	@Test
@@ -46,11 +67,36 @@ public class StreamTest {
 
 	@Test
 	public void testForEach() {
-		userDtoList.stream().forEach(userDto -> logger.info("username: {}", userDto.getUsername()));
-		userDtoList.stream().map(userDto -> userDto.getUsername())
+		userDtoList1.stream().forEach(userDto -> logger.info("username: {}", userDto.getUsername()));
+		userDtoList1.stream().map(userDto -> userDto.getUsername())
 				.forEach(username -> logger.info("username: {}", username));
-		userDtoList.stream().map(userDto -> userDto.getUsername())
+		userDtoList1.stream().map(userDto -> userDto.getUsername())
 		.forEach(System.out::println);
 	}
-
+	
+	@Test
+	public void testFlatMap() {
+		List<List<String>> userGroups = new ArrayList<List<String>>();
+		userGroups.add(userGroup1);
+		userGroups.add(userGroup2);
+		
+		List<String> userList = userGroups.stream().flatMap(userGroup -> userGroup.stream()).collect(Collectors.toList());
+		logger.info("userList: {}", userList);
+		
+		List<String> userList2 = userGroups.stream().flatMap(userGroup -> userGroup.stream()).distinct().collect(Collectors.toList());
+		logger.info("userList2: {}", userList2);	
+	}
+	
+	@Test
+	public void testFlatMap2() {
+		List<List<UserDto>> userGroups = new ArrayList<List<UserDto>>();
+		userGroups.add(userDtoList1);
+		userGroups.add(userDtoList2);
+		
+		List<UserDto> userList = userGroups.stream().flatMap(userGroup -> userGroup.stream()).collect(Collectors.toList());
+		logger.info("userList: {}", userList);
+		
+		List<UserDto> userList2 = userGroups.stream().flatMap(userGroup -> userGroup.stream()).distinct().collect(Collectors.toList());
+		logger.info("userList2: {}", userList2);	
+	}
 }
