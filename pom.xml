@@ -22,4 +22,6 @@
 			<version>1.2.3</version>
 		</dependency>
 	</dependencies>
+	<url>https://github.com/codelabor/java8-examples</url>
+	<name>java8-examples</name>
 </project>
