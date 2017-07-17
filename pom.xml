@@ -22,8 +22,6 @@
 			<version>1.2.3</version>
 		</dependency>
 	</dependencies>
-	<properties>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
-	</properties>
+	<url>https://github.com/codelabor/java8-examples</url>
+	<name>java8-examples</name>
 </project>
