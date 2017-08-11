@@ -1,8 +1,7 @@
 package org.codelabor.example.lang;
 
-import static org.junit.Assert.*;
-
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
@@ -34,14 +33,32 @@ public class SystemTest {
 	}
 
 	@Test
+	public void testGetEnv() {
+		Map<String, String> envMap = System.getenv();
+		Set keys = envMap.keySet();
+		Iterator iter = keys.iterator();
+		while (iter.hasNext()) {
+			String key = (String) iter.next();
+			logger.info("env key: {}, value: {}", key, envMap.get(key));
+		}
+	}
+
+	@Test
 	public void testGetProperties() {
 		Properties props = System.getProperties();
 		Set keys = props.keySet();
 		Iterator iter = keys.iterator();
-		while(iter.hasNext()) {
+		while (iter.hasNext()) {
 			String key = (String) iter.next();
 			logger.info("proeprty key: {}, value: {}", key, props.get(key));
 		}
+	}
+
+	@Test
+	public void testNanoTime() {
+		long startTime = System.nanoTime();
+		long endTime = System.nanoTime();
+		logger.info("elapsed time: {} nanosecond", endTime - startTime);
 	}
 
 }
