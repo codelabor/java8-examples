@@ -35,10 +35,10 @@ public class SystemTest {
 	@Test
 	public void testGetEnv() {
 		Map<String, String> envMap = System.getenv();
-		Set keys = envMap.keySet();
-		Iterator iter = keys.iterator();
+		Set<String> keys = envMap.keySet();
+		Iterator<String> iter = keys.iterator();
 		while (iter.hasNext()) {
-			String key = (String) iter.next();
+			String key = iter.next();
 			logger.info("env key: {}, value: {}", key, envMap.get(key));
 		}
 	}
